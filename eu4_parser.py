@@ -1,4 +1,5 @@
 import json
+import sys
 
 def parse(lines, next_pos, element):
     if element == "{":
@@ -97,10 +98,17 @@ def get_player_countries(root):
     return player_countries
 
 
-with open("save/test.eu4") as file:
+if len(sys.argv) != 2:
+    print("Path to the EU4 save file:")
+    path = input()
+else:
+    path = sys.argv[1]
+
+with open(path) as file:
     lines = file.readlines()
 with open("coast_provinces.json") as file:
     coast_provinces = json.loads(file.read())
+print("Calculating ...")
 
 lines = lines[1:]
 root, _ = parse_list(lines, 0)

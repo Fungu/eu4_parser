@@ -1,4 +1,5 @@
 import json
+import sys
 from PIL import Image
 import os
 import csv
@@ -58,10 +59,19 @@ def area_search(image, x, y, x_min, land_provinces, province_colors):
     return coast_provinces
 
 
-land_provinces = find_land_provinces("resources/provinces")
-province_colors = parse_csv_file("resources/definition.csv")
-image = Image.open("resources/provinces.bmp")
+print("This script is used to generate coast_provinces.json which contains the id of every coastal province around the mediterranean and black sea.")
+if len(sys.argv) != 2:
+    print("Path to your EU4 installation:")
+    path = input()
+else:
+    path = sys.argv[1]
+print("Generating coast_provinces.json ...")
+
+land_provinces = find_land_provinces(path + "/history/provinces")
+province_colors = parse_csv_file(path + "/map/definition.csv")
+image = Image.open(path + "/map/provinces.bmp")
 coast_provinces = area_search(image, 2730, 800, 2700, land_provinces, province_colors)
 
 out_file = open("coast_provinces.json", "w")
 json.dump(coast_provinces, out_file)
+print("Done!")
