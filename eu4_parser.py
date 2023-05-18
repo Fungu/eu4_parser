@@ -121,7 +121,10 @@ player_countries = get_player_countries(root)
 
 player_scores = {}
 for player, country in player_countries.items():
-    player_scores[player] = countries_coast_dev[country]
+    if country in countries_coast_dev:
+        player_scores[player] = countries_coast_dev[country]
+    else:
+        player_scores[player] = 0
 
 print("Countries dev:")
 sorted_items = sorted(countries_coast_dev.items(), key=lambda x: x[1], reverse=True)
