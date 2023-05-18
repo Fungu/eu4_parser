@@ -70,7 +70,7 @@ print("Generating coast_provinces.json ...")
 land_provinces = find_land_provinces(path + "/history/provinces")
 province_colors = parse_csv_file(path + "/map/definition.csv")
 image = Image.open(path + "/map/provinces.bmp")
-coast_provinces = area_search(image, 2730, 800, 2700, land_provinces, province_colors)
+coast_provinces = area_search(image, 2730, 800, 2722, land_provinces, province_colors)
 
 out_file = open("coast_provinces.json", "w")
 json.dump(coast_provinces, out_file)
