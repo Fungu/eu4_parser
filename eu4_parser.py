@@ -80,14 +80,12 @@ def get_countries_coast_dev(provinces, coast_provinces):
     for province_id in coast_provinces:
         province = get_first(provinces, "-" + str(province_id))
         owner = get_first(province, "owner")
-        cores = get_first(province, "cores")[0].split(" ")
-        if owner in cores:
-            dev = float(get_first(province, "base_tax")) + float(get_first(province, "base_production")) + float(get_first(province, "base_manpower"))
-            dev = int(dev)
-            if owner in countries_coast_dev:
-                countries_coast_dev[owner] += dev
-            else:
-                countries_coast_dev[owner] = dev
+        dev = float(get_first(province, "base_tax")) + float(get_first(province, "base_production")) + float(get_first(province, "base_manpower"))
+        dev = int(dev)
+        if owner in countries_coast_dev:
+            countries_coast_dev[owner] += dev
+        else:
+            countries_coast_dev[owner] = dev
     return countries_coast_dev
 
 def get_player_countries(root):
